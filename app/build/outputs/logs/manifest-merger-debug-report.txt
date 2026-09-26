@@ -111,9 +111,9 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/trisr/.gradle/caches
 	android:label
 		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:10:9-33
 	android:roundIcon
-		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:11:9-63
+		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:11:9-54
 	android:icon
-		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:9:9-58
+		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:9:9-43
 	android:allowBackup
 		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:8:9-35
 	android:theme

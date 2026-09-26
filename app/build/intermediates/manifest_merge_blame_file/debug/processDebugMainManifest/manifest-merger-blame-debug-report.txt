@@ -36,12 +36,12 @@
 23-->[androidx.core:core:1.13.1] /Users/trisr/.gradle/caches/9.0.0/transforms/ba8e8d2cb30b85972dbbab3e91761d7c/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
 24        android:debuggable="true"
 25        android:extractNativeLibs="false"
-26        android:icon="@android:drawable/sym_def_app_icon"
-26-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:9:9-58
+26        android:icon="@mipmap/ic_launcher"
+26-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:9:9-43
 27        android:label="AyatKita"
 27-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:10:9-33
-28        android:roundIcon="@android:drawable/sym_def_app_icon"
-28-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:11:9-63
+28        android:roundIcon="@mipmap/ic_launcher_round"
+28-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:11:9-54
 29        android:supportsRtl="true"
 29-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:12:9-35
 30        android:testOnly="true"
