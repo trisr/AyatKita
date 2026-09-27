@@ -119,13 +119,13 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/trisr/.gradle/caches
 	android:theme
 		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:13:9-46
 	android:name
-		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:7:9-44
+		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:7:9-56
 activity#com.ayatkita.MainActivity
 ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:14:9-22:20
 	android:exported
 		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:16:13-36
 	android:name
-		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:15:13-41
+		ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:15:13-53
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
 ADDED from /Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:17:13-21:29
 action#android.intent.action.MAIN

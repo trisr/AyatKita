@@ -1,7 +1,11 @@
 [
     {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-mdpi/ic_launcher.png"
+        "merged": "com.ayatkita.app-debug-58:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.ayatkita.app-main-60:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ayatkita.app-debug-58:/drawable-nodpi_ayatkita_splash.png.flat",
+        "source": "com.ayatkita.app-main-60:/drawable-nodpi/ayatkita_splash.png"
     },
     {
         "merged": "com.ayatkita.app-debug-58:/mipmap-mdpi_ic_launcher.png.flat",
@@ -10,62 +14,6 @@
     {
         "merged": "com.ayatkita.app-debug-58:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "com.ayatkita.app-main-60:/mipmap-xxxhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-xxxhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-hdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-hdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-mdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "com.ayatkita.app-debug-58:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.ayatkita.app-main-60:/mipmap-hdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.ayatkita.app-debug-58:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.ayatkita.app-main-60:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.ayatkita.app-debug-58:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "com.ayatkita.app-main-60:/mipmap-mdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-xxhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-xhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.ayatkita.app-debug-58:/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "com.ayatkita.app-main-60:/mipmap-xxhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-xhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-xxhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "com.ayatkita.app-debug-58:/drawable-nodpi_ayatkita_splash.png.flat",
-        "source": "com.ayatkita.app-main-60:/drawable-nodpi/ayatkita_splash.png"
-    },
-    {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-main-60:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
         "merged": "com.ayatkita.app-debug-58:/mipmap-xhdpi_ic_launcher.png.flat",
@@ -80,11 +28,19 @@
         "source": "com.ayatkita.app-main-60:/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-58:/xml_network_security_config.xml.flat",
-        "source": "/Users/trisr/.gradle/daemon/9.0.0/com.ayatkita.app-debug-59:/xml/network_security_config.xml"
+        "merged": "com.ayatkita.app-debug-58:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.ayatkita.app-main-60:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ayatkita.app-debug-58:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.ayatkita.app-main-60:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
         "merged": "com.ayatkita.app-debug-58:/mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "com.ayatkita.app-main-60:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ayatkita.app-debug-58:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.ayatkita.app-main-60:/mipmap-mdpi/ic_launcher_round.png"
     }
 ]

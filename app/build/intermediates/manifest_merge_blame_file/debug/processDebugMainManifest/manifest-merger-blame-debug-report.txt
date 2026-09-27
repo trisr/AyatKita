@@ -29,7 +29,7 @@
 20    <application
 20-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:6:5-23:19
 21        android:name="com.ayatkita.AyatKitaApplication"
-21-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:7:9-44
+21-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:7:9-56
 22        android:allowBackup="true"
 22-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:8:9-35
 23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -50,7 +50,7 @@
 32        <activity
 32-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:14:9-22:20
 33            android:name="com.ayatkita.MainActivity"
-33-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:15:13-41
+33-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:15:13-53
 34            android:exported="true" >
 34-->/Users/trisr/Playground/AyatKita/app/src/main/AndroidManifest.xml:16:13-36
 35            <intent-filter>
