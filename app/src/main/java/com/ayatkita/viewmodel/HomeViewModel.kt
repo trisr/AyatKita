@@ -45,7 +45,7 @@ class HomeViewModel(
                     _uiState.update {
                         it.copy(
                             isLoading = false,
-                            errorMessage = error.message ?: "Failed to load surah list"
+                            errorMessage = "Gagal memuat daftar surat. Periksa koneksi internet Anda."
                         )
                     }
                 }

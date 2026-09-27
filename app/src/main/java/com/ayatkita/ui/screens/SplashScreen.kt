@@ -36,7 +36,7 @@ fun SplashScreen() {
         ) {
             Image(
                 painter = painterResource(R.drawable.ayatkita_splash),
-                contentDescription = "AyatKita Quran",
+                contentDescription = "Al-Qur'an AyatKita",
                 modifier = Modifier
                     .size(300.dp)
                     .clip(RoundedCornerShape(28.dp)),
@@ -49,7 +49,7 @@ fun SplashScreen() {
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "Quran Reading Companion",
+                text = "Teman membaca Al-Qur'an",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.White.copy(alpha = 0.82f)
             )

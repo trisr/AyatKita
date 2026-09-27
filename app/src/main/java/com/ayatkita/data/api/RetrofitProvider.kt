@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitProvider {
-    private const val BASE_URL = "https://api.alquran.cloud/v1/"
+    private const val BASE_URL = "https://equran.id/api/v2/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BASIC

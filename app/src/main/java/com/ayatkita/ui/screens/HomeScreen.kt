@@ -41,14 +41,14 @@ fun HomeScreen(
                 title = { Text("AyatKita") },
                 actions = {
                     IconButton(onClick = onBookmarksClick) {
-                        Icon(Icons.Filled.Bookmarks, contentDescription = "Bookmarks")
+                        Icon(Icons.Filled.Bookmarks, contentDescription = "Markah")
                     }
                 }
             )
         }
     ) { paddingValues ->
         when {
-            uiState.isLoading -> LoadingView(message = "Loading Surah...")
+            uiState.isLoading -> LoadingView(message = "Memuat daftar surat...")
             uiState.errorMessage != null -> ErrorView(message = uiState.errorMessage!!)
             else -> {
                 LazyColumn(

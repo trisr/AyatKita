@@ -1,6 +1,7 @@
 package com.ayatkita.data.repository
 
 import com.ayatkita.data.api.QuranApiService
+import com.ayatkita.data.api.SurahDetailDto
 import com.ayatkita.data.api.SurahDto
 import com.ayatkita.data.local.BookmarkAyahEntity
 import com.ayatkita.data.local.BookmarkDao
@@ -21,30 +22,15 @@ class DefaultQuranRepository(
     }
 
     override suspend fun getSurahDetail(surahNumber: Int): SurahDetail {
-        val editions = api.getSurahEditions(surahNumber).data
-        val arabicEdition = editions.firstOrNull()
-            ?: throw IllegalStateException("Arabic edition not available")
-        val translationEdition = editions.getOrNull(1)
-            ?: throw IllegalStateException("Indonesian translation not available")
-
-        val surah = Surah(
-            number = arabicEdition.number,
-            nameArabic = arabicEdition.name,
-            nameEnglish = arabicEdition.englishName,
-            nameTranslation = arabicEdition.englishNameTranslation,
-            numberOfAyahs = arabicEdition.numberOfAyahs,
-            revelationType = arabicEdition.revelationType
-        )
-
-        val translationByAyah = translationEdition.ayahs.associateBy { it.numberInSurah }
-
-        val ayahs = arabicEdition.ayahs.map { arabicAyah ->
+        val detail = api.getSurah(surahNumber).data
+        val surah = detail.toModel()
+        val ayahs = detail.ayat.map { ayah ->
             Ayah(
                 surahNumber = surah.number,
                 surahName = surah.nameEnglish,
-                ayahNumber = arabicAyah.numberInSurah,
-                arabicText = arabicAyah.text,
-                translationText = translationByAyah[arabicAyah.numberInSurah]?.text.orEmpty()
+                ayahNumber = ayah.nomorAyat,
+                arabicText = ayah.teksArab,
+                translationText = ayah.teksIndonesia
             )
         }
 
@@ -52,11 +38,8 @@ class DefaultQuranRepository(
     }
 
     override suspend fun getSurahAudioUrl(surahNumber: Int): String? {
-        return api.getSurahAudio(surahNumber)
-            .data
-            .ayahs
-            .firstOrNull()
-            ?.audio
+        val audioFull = api.getSurah(surahNumber).data.audioFull.orEmpty()
+        return audioFull["05"] ?: audioFull.values.firstOrNull()
     }
 
     override fun observeBookmarks(): Flow<List<BookmarkAyah>> {
@@ -94,12 +77,23 @@ class DefaultQuranRepository(
 
     private fun SurahDto.toModel(): Surah {
         return Surah(
-            number = number,
-            nameArabic = name,
-            nameEnglish = englishName,
-            nameTranslation = englishNameTranslation,
-            numberOfAyahs = numberOfAyahs,
-            revelationType = revelationType
+            number = nomor,
+            nameArabic = nama,
+            nameEnglish = namaLatin,
+            nameTranslation = arti,
+            numberOfAyahs = jumlahAyat,
+            revelationType = tempatTurun
+        )
+    }
+
+    private fun SurahDetailDto.toModel(): Surah {
+        return Surah(
+            number = nomor,
+            nameArabic = nama,
+            nameEnglish = namaLatin,
+            nameTranslation = arti,
+            numberOfAyahs = jumlahAyat,
+            revelationType = tempatTurun
         )
     }
 }

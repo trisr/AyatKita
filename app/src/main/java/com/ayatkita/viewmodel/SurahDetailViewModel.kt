@@ -57,7 +57,7 @@ class SurahDetailViewModel(
                     _uiState.update {
                         it.copy(
                             isLoading = false,
-                            errorMessage = error.message ?: "Failed to load surah detail"
+                            errorMessage = "Gagal memuat surat. Periksa koneksi internet Anda."
                         )
                     }
                 }
@@ -116,7 +116,7 @@ class SurahDetailViewModel(
                     _uiState.update {
                         it.copy(
                             isAudioLoading = false,
-                            errorMessage = error.message ?: "Failed to play audio"
+                            errorMessage = "Gagal memutar audio. Periksa koneksi internet Anda."
                         )
                     }
                 }

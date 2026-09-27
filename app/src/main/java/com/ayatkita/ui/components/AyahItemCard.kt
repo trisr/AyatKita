@@ -47,7 +47,7 @@ fun AyahItemCard(
                 IconButton(onClick = onBookmarkClick) {
                     Icon(
                         imageVector = if (isBookmarked) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
-                        contentDescription = "Bookmark Ayah"
+                        contentDescription = "Tandai ayat"
                     )
                 }
             }

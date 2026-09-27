@@ -1,43 +1,35 @@
 package com.ayatkita.data.api
 
-import com.google.gson.annotations.SerializedName
-
 data class ApiResponse<T>(
     val code: Int,
-    val status: String,
+    val message: String,
     val data: T
 )
 
 data class SurahDto(
-    val number: Int,
-    val name: String,
-    val englishName: String,
-    val englishNameTranslation: String,
-    val numberOfAyahs: Int,
-    val revelationType: String
+    val nomor: Int,
+    val nama: String,
+    val namaLatin: String,
+    val jumlahAyat: Int,
+    val tempatTurun: String,
+    val arti: String,
+    val audioFull: Map<String, String>? = null
 )
 
-data class EditionDto(
-    val number: Int,
-    val name: String,
-    val englishName: String,
-    val englishNameTranslation: String,
-    val numberOfAyahs: Int,
-    val revelationType: String,
-    val ayahs: List<EditionAyahDto>
+data class SurahDetailDto(
+    val nomor: Int,
+    val nama: String,
+    val namaLatin: String,
+    val jumlahAyat: Int,
+    val tempatTurun: String,
+    val arti: String,
+    val audioFull: Map<String, String>? = null,
+    val ayat: List<AyahDto>
 )
 
-data class EditionAyahDto(
-    val number: Int,
-    val text: String,
-    val numberInSurah: Int
-)
-
-data class AudioEditionDto(
-    val ayahs: List<AudioAyahDto>
-)
-
-data class AudioAyahDto(
-    @SerializedName("numberInSurah") val numberInSurah: Int,
-    val audio: String?
+data class AyahDto(
+    val nomorAyat: Int,
+    val teksArab: String,
+    val teksIndonesia: String,
+    val audio: Map<String, String>? = null
 )

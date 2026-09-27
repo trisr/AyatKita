@@ -38,11 +38,11 @@ fun SurahDetailScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(uiState.surah?.nameEnglish ?: "Surah")
+                    Text(uiState.surah?.nameEnglish ?: "Surat")
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Kembali")
                     }
                 },
                 actions = {
@@ -56,7 +56,7 @@ fun SurahDetailScreen(
                             } else {
                                 Icons.Filled.PlayCircle
                             },
-                            contentDescription = "Play or Pause Audio"
+                            contentDescription = "Putar atau jeda audio"
                         )
                     }
                 }
@@ -64,7 +64,7 @@ fun SurahDetailScreen(
         }
     ) { paddingValues ->
         when {
-            uiState.isLoading -> LoadingView(message = "Loading Ayahs...")
+            uiState.isLoading -> LoadingView(message = "Memuat ayat...")
             uiState.errorMessage != null -> ErrorView(message = uiState.errorMessage!!)
             else -> {
                 LazyColumn(

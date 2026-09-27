@@ -35,18 +35,18 @@ fun BookmarkScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Bookmarks") },
+                title = { Text("Markah") },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Kembali")
                     }
                 }
             )
         }
     ) { paddingValues ->
         when {
-            uiState.isLoading -> LoadingView(message = "Loading Bookmarks...")
-            uiState.bookmarks.isEmpty() -> EmptyView(message = "No bookmarked ayah yet")
+            uiState.isLoading -> LoadingView(message = "Memuat markah...")
+            uiState.bookmarks.isEmpty() -> EmptyView(message = "Belum ada ayat yang ditandai")
             else -> {
                 LazyColumn(
                     modifier = Modifier

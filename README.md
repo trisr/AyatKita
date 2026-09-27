@@ -4,11 +4,11 @@ AyatKita is an Android Quran app MVP built with Kotlin + Jetpack Compose.
 
 ## MVP Features
 
-- Surah list (114 surahs) from AlQuran Cloud API
-- Surah detail with Arabic text + Indonesian translation
-- Audio recitation playback (Alafasy edition)
-- Ayah bookmark saved locally with Room
-- Dark mode support (Material 3)
+- Daftar 114 surat dari API eQuran.id
+- Detail surat dengan teks Arab dan terjemahan Indonesia
+- Pemutaran audio surat
+- Markah ayat tersimpan secara lokal dengan Room
+- Dukungan mode gelap (Material 3)
 
 ## Tech Stack
 
@@ -23,9 +23,8 @@ AyatKita is an Android Quran app MVP built with Kotlin + Jetpack Compose.
 
 ## API Endpoints Used
 
-- `GET https://api.alquran.cloud/v1/surah`
-- `GET https://api.alquran.cloud/v1/surah/{surahNumber}/editions/quran-uthmani,id.indonesian`
-- `GET https://api.alquran.cloud/v1/surah/{surahNumber}/ar.alafasy`
+- `GET https://equran.id/api/v2/surat`
+- `GET https://equran.id/api/v2/surat/{nomor}`
 
 ## Package Structure
 
@@ -51,6 +50,6 @@ app/src/main/java/com/ayatkita/
 
 ## Notes
 
-- Bookmarks are toggle-based from Surah Detail screen.
-- Audio is played at surah level from the first ayah audio URL returned by the API.
+- Markah dapat ditambahkan atau dihapus dari halaman detail surat.
+- Audio diputar menggunakan URL audio surat dari API eQuran.id.
 # AyatKita

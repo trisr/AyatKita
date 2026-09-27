@@ -42,7 +42,7 @@ fun SurahListItem(
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Text(
-                    text = "${surah.numberOfAyahs} ayat • ${surah.revelationType}",
+                    text = "${surah.numberOfAyahs} ayat • Turun di ${surah.revelationType}",
                     style = MaterialTheme.typography.bodySmall
                 )
             }
