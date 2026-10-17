@@ -14,7 +14,12 @@ import kotlinx.coroutines.launch
 data class BookmarkUiState(
     val bookmarks: List<BookmarkAyah> = emptyList(),
     val isLoading: Boolean = true
-)
+) {
+    val bookmarksBySurah: Map<Int, List<BookmarkAyah>>
+        get() = bookmarks
+            .groupBy { it.surahNumber }
+            .toSortedMap()
+}
 
 class BookmarkViewModel(
     private val repository: QuranRepository
