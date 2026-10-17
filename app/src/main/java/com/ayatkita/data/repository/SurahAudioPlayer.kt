@@ -39,6 +39,13 @@ class SurahAudioPlayer(context: Context) {
         player.pause()
     }
 
+    fun stop() {
+        player.stop()
+        player.clearMediaItems()
+        currentUrl = null
+        _isPlaying.value = false
+    }
+
     fun release() {
         player.release()
     }

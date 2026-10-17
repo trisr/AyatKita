@@ -1,9 +1,11 @@
 package com.ayatkita.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,23 +13,30 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.PauseCircle
 import androidx.compose.material.icons.filled.PlayCircle
+import androidx.compose.material.icons.filled.StopCircle
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ayatkita.model.ReciterAudio
 import com.ayatkita.ui.components.AyahItemCard
 import com.ayatkita.ui.components.ErrorView
 import com.ayatkita.ui.components.LoadingView
@@ -40,55 +49,25 @@ fun SurahDetailScreen(
     onBackClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    var isReciterMenuExpanded by rememberSaveable { mutableStateOf(false) }
+    var showAudioSheet by rememberSaveable { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = {
-                    Text(uiState.surah?.nameEnglish ?: "Surat")
-                },
+                title = { Text(uiState.surah?.nameEnglish ?: "Surat") },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Kembali")
                     }
                 },
                 actions = {
-                    if (uiState.selectedReciter != null) {
-                        Box {
-                            TextButton(onClick = { isReciterMenuExpanded = true }) {
-                                Text(
-                                    text = uiState.selectedReciter!!.name,
-                                    maxLines = 1
-                                )
-                            }
-                            DropdownMenu(
-                                expanded = isReciterMenuExpanded,
-                                onDismissRequest = { isReciterMenuExpanded = false }
-                            ) {
-                                uiState.audioOptions.forEach { reciter ->
-                                    DropdownMenuItem(
-                                        text = { Text(reciter.name) },
-                                        onClick = {
-                                            viewModel.onReciterSelected(reciter)
-                                            isReciterMenuExpanded = false
-                                        }
-                                    )
-                                }
-                            }
-                        }
-                    }
                     IconButton(
-                        onClick = viewModel::onPlayPauseAudio,
-                        enabled = !uiState.isAudioLoading
+                        onClick = { showAudioSheet = true },
+                        enabled = uiState.audioOptions.isNotEmpty()
                     ) {
                         Icon(
-                            imageVector = if (uiState.isAudioPlaying) {
-                                Icons.Filled.PauseCircle
-                            } else {
-                                Icons.Filled.PlayCircle
-                            },
-                            contentDescription = "Putar atau jeda audio ${uiState.selectedReciter?.name.orEmpty()}"
+                            imageVector = Icons.Filled.VolumeUp,
+                            contentDescription = "Buka pemutar audio"
                         )
                     }
                 }
@@ -114,6 +93,110 @@ fun SurahDetailScreen(
                         )
                     }
                 }
+            }
+        }
+    }
+
+    if (showAudioSheet) {
+        ModalBottomSheet(onDismissRequest = { showAudioSheet = false }) {
+            AudioBottomSheet(
+                reciterOptions = uiState.audioOptions,
+                selectedReciterId = uiState.selectedReciter?.id,
+                isPlaying = uiState.isAudioPlaying,
+                onReciterSelected = viewModel::onReciterSelected,
+                onPlay = {
+                    if (uiState.isAudioPlaying) {
+                        viewModel.onPauseAudio()
+                    } else {
+                        viewModel.onPlayAudio()
+                        showAudioSheet = false
+                    }
+                },
+                onStop = viewModel::onStopAudio
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun AudioBottomSheet(
+    reciterOptions: List<ReciterAudio>,
+    selectedReciterId: String?,
+    isPlaying: Boolean,
+    onReciterSelected: (ReciterAudio) -> Unit,
+    onPlay: () -> Unit,
+    onStop: () -> Unit
+) {
+    var isReciterDropdownExpanded by rememberSaveable { mutableStateOf(false) }
+    val selectedReciter = reciterOptions.firstOrNull { it.id == selectedReciterId }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 24.dp, end = 24.dp, bottom = 32.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Text(
+            text = "Audio surat",
+            style = MaterialTheme.typography.headlineSmall
+        )
+        ExposedDropdownMenuBox(
+            expanded = isReciterDropdownExpanded,
+            onExpandedChange = { isReciterDropdownExpanded = !isReciterDropdownExpanded }
+        ) {
+            OutlinedTextField(
+                value = selectedReciter?.name.orEmpty(),
+                onValueChange = {},
+                readOnly = true,
+                label = { Text("Pilih qari") },
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(
+                        expanded = isReciterDropdownExpanded
+                    )
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .menuAnchor()
+            )
+            ExposedDropdownMenu(
+                expanded = isReciterDropdownExpanded,
+                onDismissRequest = { isReciterDropdownExpanded = false }
+            ) {
+                reciterOptions.forEach { reciter ->
+                    DropdownMenuItem(
+                        text = { Text(reciter.name) },
+                        onClick = {
+                            onReciterSelected(reciter)
+                            isReciterDropdownExpanded = false
+                        }
+                    )
+                }
+            }
+        }
+
+        androidx.compose.material3.HorizontalDivider()
+
+        Text(
+            text = if (isPlaying) "Sedang diputar" else "Siap diputar",
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            IconButton(onClick = onPlay) {
+                Icon(
+                    imageVector = if (isPlaying) {
+                        Icons.Filled.PauseCircle
+                    } else {
+                        Icons.Filled.PlayCircle
+                    },
+                    contentDescription = if (isPlaying) "Jeda" else "Putar"
+                )
+            }
+            IconButton(onClick = onStop) {
+                Icon(Icons.Filled.StopCircle, contentDescription = "Berhenti")
             }
         }
     }

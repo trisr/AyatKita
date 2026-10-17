@@ -102,13 +102,7 @@ class SurahDetailViewModel(
         }
     }
 
-    fun onPlayPauseAudio() {
-        val isPlaying = uiState.value.isAudioPlaying
-        if (isPlaying) {
-            audioPlayer.pause()
-            return
-        }
-
+    fun onPlayAudio() {
         val reciter = uiState.value.selectedReciter
         if (reciter == null) {
             _uiState.update {
@@ -118,6 +112,14 @@ class SurahDetailViewModel(
         }
 
         audioPlayer.play(reciter.url)
+    }
+
+    fun onPauseAudio() {
+        audioPlayer.pause()
+    }
+
+    fun onStopAudio() {
+        audioPlayer.stop()
     }
 
     fun onReciterSelected(reciter: ReciterAudio) {
