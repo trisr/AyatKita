@@ -11,10 +11,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.PauseCircle
 import androidx.compose.material.icons.filled.PlayCircle
 import androidx.compose.material.icons.filled.StopCircle
 import androidx.compose.material.icons.filled.VolumeUp
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -46,7 +48,9 @@ import com.ayatkita.viewmodel.SurahDetailViewModel
 @Composable
 fun SurahDetailScreen(
     viewModel: SurahDetailViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onPreviousSurahClick: () -> Unit,
+    onNextSurahClick: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var showAudioSheet by rememberSaveable { mutableStateOf(false) }
@@ -92,6 +96,21 @@ fun SurahDetailScreen(
                             onBookmarkClick = { viewModel.toggleBookmark(ayah) }
                         )
                     }
+
+                    item(key = "surah-navigation") {
+                        SurahNavigation(
+                            previousSurahName = uiState.previousSurah?.let {
+                                "${it.number}. ${it.nameEnglish}"
+                            },
+                            nextSurahName = uiState.nextSurah?.let {
+                                "${it.number}. ${it.nameEnglish}"
+                            },
+                            canGoPrevious = (uiState.surah?.number ?: 1) > 1,
+                            canGoNext = (uiState.surah?.number ?: 114) < 114,
+                            onPreviousClick = onPreviousSurahClick,
+                            onNextClick = onNextSurahClick
+                        )
+                    }
                 }
             }
         }
@@ -114,6 +133,46 @@ fun SurahDetailScreen(
                 },
                 onStop = viewModel::onStopAudio
             )
+        }
+    }
+}
+
+@Composable
+private fun SurahNavigation(
+    previousSurahName: String?,
+    nextSurahName: String?,
+    canGoPrevious: Boolean,
+    canGoNext: Boolean,
+    onPreviousClick: () -> Unit,
+    onNextClick: () -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp, bottom = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Button(
+            onClick = onPreviousClick,
+            enabled = canGoPrevious,
+            modifier = Modifier.weight(1f)
+        ) {
+            Icon(Icons.Filled.ArrowBack, contentDescription = null)
+            Text(
+                text = previousSurahName ?: "Surat sebelumnya",
+                modifier = Modifier.padding(start = 6.dp)
+            )
+        }
+        Button(
+            onClick = onNextClick,
+            enabled = canGoNext,
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                text = nextSurahName ?: "Surat berikutnya",
+                modifier = Modifier.padding(end = 6.dp)
+            )
+            Icon(Icons.Filled.ArrowForward, contentDescription = null)
         }
     }
 }

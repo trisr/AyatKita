@@ -18,6 +18,8 @@ import kotlinx.coroutines.launch
 data class SurahDetailUiState(
     val isLoading: Boolean = true,
     val surah: Surah? = null,
+    val previousSurah: Surah? = null,
+    val nextSurah: Surah? = null,
     val ayahs: List<Ayah> = emptyList(),
     val audioOptions: List<ReciterAudio> = emptyList(),
     val selectedReciter: ReciterAudio? = null,
@@ -40,6 +42,7 @@ class SurahDetailViewModel(
         observeBookmarks()
         observeAudioState()
         loadSurahDetail()
+        loadAdjacentSurahs()
     }
 
     fun loadSurahDetail() {
@@ -64,6 +67,24 @@ class SurahDetailViewModel(
                         it.copy(
                             isLoading = false,
                             errorMessage = "Gagal memuat surat. Periksa koneksi internet Anda."
+                        )
+                    }
+                }
+        }
+    }
+
+    private fun loadAdjacentSurahs() {
+        viewModelScope.launch {
+            runCatching { repository.getSurahs() }
+                .onSuccess { surahs ->
+                    _uiState.update {
+                        it.copy(
+                            previousSurah = surahs.firstOrNull { surah ->
+                                surah.number == surahNumber - 1
+                            },
+                            nextSurah = surahs.firstOrNull { surah ->
+                                surah.number == surahNumber + 1
+                            }
                         )
                     }
                 }
