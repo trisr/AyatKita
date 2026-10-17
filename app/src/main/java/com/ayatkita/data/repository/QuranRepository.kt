@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface QuranRepository {
     suspend fun getSurahs(forceRefresh: Boolean = false): List<Surah>
     suspend fun getSurahDetail(surahNumber: Int): SurahDetail
-    suspend fun getSurahAudioUrl(surahNumber: Int): String?
     fun observeBookmarks(): Flow<List<BookmarkAyah>>
     suspend fun toggleBookmark(bookmark: BookmarkAyah)
 }

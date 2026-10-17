@@ -7,6 +7,7 @@ import com.ayatkita.data.repository.QuranRepository
 import com.ayatkita.data.repository.SurahAudioPlayer
 import com.ayatkita.model.Ayah
 import com.ayatkita.model.BookmarkAyah
+import com.ayatkita.model.ReciterAudio
 import com.ayatkita.model.Surah
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,6 +19,8 @@ data class SurahDetailUiState(
     val isLoading: Boolean = true,
     val surah: Surah? = null,
     val ayahs: List<Ayah> = emptyList(),
+    val audioOptions: List<ReciterAudio> = emptyList(),
+    val selectedReciter: ReciterAudio? = null,
     val bookmarkedAyahKeys: Set<String> = emptySet(),
     val isAudioPlaying: Boolean = false,
     val isAudioLoading: Boolean = false,
@@ -49,6 +52,9 @@ class SurahDetailViewModel(
                             isLoading = false,
                             surah = detail.surah,
                             ayahs = detail.ayahs,
+                            audioOptions = detail.audioOptions,
+                            selectedReciter = detail.audioOptions.firstOrNull { it.id == "05" }
+                                ?: detail.audioOptions.firstOrNull(),
                             errorMessage = null
                         )
                     }
@@ -103,23 +109,21 @@ class SurahDetailViewModel(
             return
         }
 
-        viewModelScope.launch {
-            _uiState.update { it.copy(isAudioLoading = true) }
-            runCatching { repository.getSurahAudioUrl(surahNumber) }
-                .onSuccess { url ->
-                    if (!url.isNullOrBlank()) {
-                        audioPlayer.play(url)
-                    }
-                    _uiState.update { it.copy(isAudioLoading = false) }
-                }
-                .onFailure { error ->
-                    _uiState.update {
-                        it.copy(
-                            isAudioLoading = false,
-                            errorMessage = "Gagal memutar audio. Periksa koneksi internet Anda."
-                        )
-                    }
-                }
+        val reciter = uiState.value.selectedReciter
+        if (reciter == null) {
+            _uiState.update {
+                it.copy(errorMessage = "Audio untuk surat ini belum tersedia.")
+            }
+            return
+        }
+
+        audioPlayer.play(reciter.url)
+    }
+
+    fun onReciterSelected(reciter: ReciterAudio) {
+        _uiState.update { it.copy(selectedReciter = reciter, errorMessage = null) }
+        if (uiState.value.isAudioPlaying) {
+            audioPlayer.play(reciter.url)
         }
     }
 

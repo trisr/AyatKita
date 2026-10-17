@@ -7,6 +7,7 @@ import com.ayatkita.data.local.BookmarkAyahEntity
 import com.ayatkita.data.local.BookmarkDao
 import com.ayatkita.model.Ayah
 import com.ayatkita.model.BookmarkAyah
+import com.ayatkita.model.ReciterAudio
 import com.ayatkita.model.Surah
 import com.ayatkita.model.SurahDetail
 import kotlinx.coroutines.flow.Flow
@@ -34,12 +35,17 @@ class DefaultQuranRepository(
             )
         }
 
-        return SurahDetail(surah = surah, ayahs = ayahs)
-    }
+        val audioOptions = detail.audioFull.orEmpty().mapNotNull { (id, url) ->
+            reciterNames[id]?.let { name ->
+                ReciterAudio(id = id, name = name, url = url)
+            }
+        }.sortedBy { it.id }
 
-    override suspend fun getSurahAudioUrl(surahNumber: Int): String? {
-        val audioFull = api.getSurah(surahNumber).data.audioFull.orEmpty()
-        return audioFull["05"] ?: audioFull.values.firstOrNull()
+        return SurahDetail(
+            surah = surah,
+            ayahs = ayahs,
+            audioOptions = audioOptions
+        )
     }
 
     override fun observeBookmarks(): Flow<List<BookmarkAyah>> {
@@ -94,6 +100,17 @@ class DefaultQuranRepository(
             nameTranslation = arti,
             numberOfAyahs = jumlahAyat,
             revelationType = tempatTurun
+        )
+    }
+
+    private companion object {
+        val reciterNames = mapOf(
+            "01" to "Abdullah Al-Juhany",
+            "02" to "Abdul Muhsin Al-Qasim",
+            "03" to "Abdurrahman As-Sudais",
+            "04" to "Ibrahim Al-Dossari",
+            "05" to "Misyari Rasyid Al-Afasy",
+            "06" to "Yasser Al-Dosari"
         )
     }
 }
